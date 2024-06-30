@@ -19,10 +19,17 @@ app.get('/api/plan/:day', (req, res) => {
 });
 
 app.post('/api/notify', (req, res) => {
-  const { email, message } = req.body;
-  const subject = 'Daily Learning Plan';
-  sendEmail(email, subject, message);
-  res.sendStatus(200);
+  console.log('Received request:', req.body);
+  const { email, day } = req.body;
+  const plan = plans.find((p) => p.day === day);
+  if (plan) {
+    const subject = 'Daily Learning Plan';
+    console.log('Sending email with message:', plan.message); // Debug log
+    sendEmail(email, subject, plan.task);
+    res.sendStatus(200);
+  } else {
+    res.status(404).json({ message: 'Plan not found for the given day' });
+  }
 });
 
 const PORT = process.env.PORT || 5000;
