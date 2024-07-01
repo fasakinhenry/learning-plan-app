@@ -369,6 +369,7 @@ const plans = [
   { day: 129, task: 'Build and develop an application for production.' },
 ];
 
+// Actual code that seeds the database
 Plan.insertMany(plans)
   .then(() => {
     console.log('Data seeded successfully');
