@@ -372,6 +372,7 @@ const plans = [
 // Actual code that seeds the database
 Plan.insertMany(plans)
   .then(() => {
+    // Log report if data logs in successfully
     console.log('Data seeded successfully');
     mongoose.connection.close();
   })
